@@ -46,4 +46,12 @@ public class PersonService {
     return new ResponseEntity<>(person, HttpStatus.OK);
   }
 
+  public ResponseEntity delete(Long id) {
+    Person person = repository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Person not found!"));
+
+    repository.delete(person);
+    return ResponseEntity.noContent().build();
+  }
+
 }
