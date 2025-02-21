@@ -1,7 +1,7 @@
 package br.com.msimeaor.java.erudio.exceptions.handler;
 
 import br.com.msimeaor.java.erudio.exceptions.ExceptionResponse;
-import br.com.msimeaor.java.erudio.exceptions.ResourceNotFound;
+import br.com.msimeaor.java.erudio.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -26,7 +26,7 @@ public class HandlerController extends ResponseEntityExceptionHandler {
     return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
-  @ExceptionHandler(ResourceNotFound.class)
+  @ExceptionHandler(ResourceNotFoundException.class)
   public final ResponseEntity<ExceptionResponse> resourceNotFoundException(Exception ex, WebRequest request) {
     ExceptionResponse response = new ExceptionResponse(
             new Date(),

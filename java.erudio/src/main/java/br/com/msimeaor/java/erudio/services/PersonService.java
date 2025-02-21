@@ -1,5 +1,6 @@
 package br.com.msimeaor.java.erudio.services;
 
+import br.com.msimeaor.java.erudio.exceptions.ResourceNotFoundException;
 import br.com.msimeaor.java.erudio.models.Person;
 import br.com.msimeaor.java.erudio.repositories.PersonRepository;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,8 @@ public class PersonService {
   }
 
   public ResponseEntity<Person> findById(Long id) {
-    Person person = repository.findById(id).get();
+    Person person = repository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Resource not found!"));
     return new ResponseEntity<>(person, HttpStatus.OK);
   }
 
@@ -29,6 +31,19 @@ public class PersonService {
 
   public List<Person> findAll() {
     return repository.findAll();
+  }
+
+  public ResponseEntity<Person> update(Long id, Person updatedPerson) {
+    Person person = repository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Person not found!"));
+
+    person.setFirstName(updatedPerson.getFirstName());
+    person.setLastName(updatedPerson.getLastName());
+    person.setGender(updatedPerson.getGender());
+    person.setAddress(updatedPerson.getAddress());
+    person = repository.save(person);
+
+    return new ResponseEntity<>(person, HttpStatus.OK);
   }
 
 }

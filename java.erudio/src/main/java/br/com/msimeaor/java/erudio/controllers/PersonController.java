@@ -32,4 +32,10 @@ public class PersonController {
     return service.findAll();
   }
 
+  @PutMapping("/update/{id}")
+  public ResponseEntity<Person> update(@PathVariable("id") Long id,
+                                       @RequestBody Person updatedPerson) {
+    return service.update(id, updatedPerson);
+  }
+
 }
