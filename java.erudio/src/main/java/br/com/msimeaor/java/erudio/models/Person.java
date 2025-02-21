@@ -1,16 +1,31 @@
 package br.com.msimeaor.java.erudio.models;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name = "person")
 public class Person implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column
   private Long id;
+
+  @Column(name = "first_name", length = 50, nullable = false)
   private String firstName;
+
+  @Column(name = "last_name", length = 100, nullable = false)
   private String lastName;
+
+  @Column(name = "address", length = 100)
   private String address;
+
+  @Column(name = "gender", length = 6, nullable = false)
   private String gender;
 
   public Person() {}

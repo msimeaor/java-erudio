@@ -2,6 +2,7 @@ package br.com.msimeaor.java.erudio.controllers;
 
 import br.com.msimeaor.java.erudio.models.Person;
 import br.com.msimeaor.java.erudio.services.PersonService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,14 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/people")
 public class PersonController {
 
-  private PersonService personService;
+  private PersonService service;
 
-  public PersonController(PersonService personService) {
-    this.personService = personService;
+  public PersonController(PersonService service) {
+    this.service = service;
   }
 
+  @GetMapping("/{id}")
   public Person findById(@PathVariable("id") Long id) {
-      return personService.findById(id);
+      return service.findById(id);
   }
 
 }
