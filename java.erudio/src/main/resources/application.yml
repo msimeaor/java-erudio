@@ -13,3 +13,7 @@ spring:
         hibernate:
           dialect: org.hibernate.dialect.MySQL8Dialect
       show-sql: false
+logging:
+  level:
+    root: WARN
+#    br.com.msimeaor.java.erudio: DEBUG
